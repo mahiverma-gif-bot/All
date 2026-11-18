@@ -1,0 +1,202 @@
+Step 1: git config --global user.name “anjalibansode-17”
+Step 2: git config --global user.email
+“bansode.anjali1703@gmail.com ”
+Step 3: git init
+Step 4: cd desktop
+Step 5: mkdir 007_anjali
+Step 6: cd 007_anjali
+Step 7: nano app.py
+Step 8: git init
+Step 9: git add .
+Step10: git commit -m ”new mess”
+Step 11: git remote add origin
+“https://github.com/anjalibansode-17/007_anjali.git”
+Step 12: git push -u origin master
+
+Step 1: git checkout -b login
+Step 2: git pull origin master
+Step 3: nano login.py
+Step 4:git status
+Step 5: git add login.py
+Step 6: git status
+Step 7: git commit -m "Added a mess"
+Step 8: git status
+Step 9: git checkout master
+Step 10: git merge login
+Step 11: git status
+Step 12: git push origin master
+Step 13: Authenticate and then again run step 12
+
+
+AIM: To install and configure Jenkins on a local system and create
+an automated CI/CD pipeline that integrates with a version
+control system, enabling continuous integration and continuous
+deployment of a sample application.
+IN VMWare (Windows)
+Install Git, Java 25, Jenkins in VMWare(Windows)
+For jenkins:
+Paste the localhost:8080 in url line, red line copy paste in in FE
+home>path, open notepad, paste the password in url, download
+suggest plugins, create acc username:anjali password:anjali007
+Go to settings-Plugins-BlueOcean-Install-Create new Pipeline
+Create new pipline-git-add ur file- convert slashes and add file:///
+-create pipeline
+
+Go to tools-Program files-git-bin- copy that path paste+
+\git.exe-clone the repository-copy the path of the repository filepaste it after file:///-change all the slashes- name the conflict
+Click + name it-add step-window batch script-in script put echo “name”-save-sun n run
+
+In Jenkins.xml
+Replace this line:
+<arguments>-Xrs -Xmx256m
+-Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle -jar
+"C:\Program Files\Jenkins\jenkins.war" --httpPort=8080
+--webroot="%ProgramData%\Jenkins\war"</arguments>
+With this line:
+<arguments>-Xrs -Xmx256m
+-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true
+-Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle -jar
+"C:\Program Files\Jenkins\jenkins.war" --httpPort=8080
+--webroot="%ProgramData%\Jenkins\war"</arguments>
+
+
+AIM: Docker
+Refer this:
+https://chatgpt.com/share/6abb9a16-7440-83e8-9db2-7933ce8
+445cf
+In CMD, Run these:
+1. .\bcdedit.exe /set hypervisorlaunchtype off
+2. .\reg.exe add
+"HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard"
+/v EnableVirtualizationBasedSecurity /t REG_DWORD /d 0
+/f
+3. .\reg.exe add
+"HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\
+Scenarios\HypervisorEnforcedCodeIntegrity" /v Enabled /t
+REG_DWORD /d 0 /f
+Restart the system
+Windows security-device security- core isolation- memory
+integrity off
+In VMWare setting change number of processors to 4, restart the vm
+
+In both, local n vm, run these commands:
+1. dism.exe /online /enable-feature
+/featurename:Microsoft-Windows-Subsystem-Linux /all
+/norestart
+2. dism.exe /online /enable-feature
+/featurename:VirtualMachinePlatform /all /norestart
+Powershell run as administrator: docker run hello-world
+– - set up ends – -
+
+Create a website and put it on github
+In bash:
+>cd desktop
+>git clone https://github.com/anjalibansode-17/mini.git
+>cd mini
+>nano docker :
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+EXPOSE 80
+>docker build -t mini
+>docker run -d -p 8081:80 –name mini mini
+>docker ps
+[container name is mini]
+On browser open localhost:8081
+
+
+AIM: Continuous Integration and Deployment using Git, Jenkins
+and Docker
+.cd /c/Users/Admin/Downloads
+>git clone https://github.com/anjalibansode-17/mini.git
+>cd mini
+>ls
+>nano Dockerfile:
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+EXPOSE 80
+>cat Dockerfile
+
+AIM: Continuous Integration and Deployment using Git, Jenkins
+and Docker
+.cd /c/Users/Admin/Downloads
+>git clone https://github.com/anjalibansode-17/mini.git
+>cd mini
+>ls
+>nano Dockerfile:
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+EXPOSE 80
+>cat Dockerfile
+>Add Docker to Windows PATH
+>Action: Press Win + R
+>Type: sysdm.cpl
+>Go to Advanced → Environment Variables
+>Under System variables:
+1. Select Path
+2. Click Edit
+3. Click New
+4. Add: [in cmd: where docker]
+C:\Users\Admin\AppData\Local\Programs\DockerDesktop\resou
+rces\bin
+5. Click OK
+6. Click OK
+7. Click OK
+> Restart Jenkins
+>Action: Press Win + R
+>Type: services.msc
+>Find Jenkins → Right-click → Restart
+>Create a New Jenkins Pipeline
+Stage: Build ; Step:Windows Batch Script
+Script: where docker docker --version docker build -t mini.[here
+mini is the container name]
+Stage: Run Docker Container; Step:Windows Batch Script
+Script: docker rm -f mini1 >nul 2>&1 & docker run -d -p 8081:80
+--name mini1 mini1 .
+Stage: Verify the Docker Container.; Step:Windows Batch Script
+Script: docker ps
+Pipeline works
+On browser open localhost:8081
+
+
+AIM: KUBERNETES
+>kubectl version --client
+>kubectl cluster-info
+>kubectl create deployment nginx --image=nginx
+>kubectl get nodes
+>kubectl get pods
+>kubectl expose deployment nginx --port=80 --type=NodePort
+>kubectl get service nginx
+>kubectl port-forward svc/nginx 8082:80
+
+>kubectl get all
+>kubectl scale deployment nginx --replicas=3
+>kubectl get pods
+>kubectl get deployment nginx
+
+
+AIM: ANSILBE
+>wsl --install
+>Open ubuntu
+>sudo apt update
+>sudo apt upgrade -y
+>sudo apt install ansible -y
+>ansible --version
+>mkdir ansible-practical
+>cd ansible-practical
+>nano playbook.yml
+---
+- name: Basic Ansible Automation
+ hosts: localhost
+ connection: local
+ tasks:
+ - name: Create a text file
+ file:
+ path: /home/anjali/ansible_file.txt
+ state: touch
+ - name: Write content to a file
+ copy:
+ content: "This file is created using Ansible automation"
+ dest: /home/anjali/ansible_message.tx
+ >ansible-playbook playbook.yml
+>ls -l /home/anjali/
+>cat /home/anjali/ansible_message.txt
